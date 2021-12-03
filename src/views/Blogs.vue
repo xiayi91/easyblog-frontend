@@ -49,6 +49,7 @@ export default {
   methods: {
     page(currentPage) {
       const _this = this
+
       _this.$axios.get("/blogs?currentPage=" + currentPage).then(res => {
         console.log(res)
         _this.blogs = res.data.data.records

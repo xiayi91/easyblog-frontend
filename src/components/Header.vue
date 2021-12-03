@@ -1,6 +1,5 @@
 <template>
     <div class="m-content">
-        <h3>Let's edit our blogs</h3>
         <div class="block">
             <el-avatar :size="100" :src="user.avatar"></el-avatar>
             <div>{{ user.username }}</div>
@@ -58,13 +57,22 @@
           },
         },
         created() {
-          console.log("===============username")
-          console.log(this.$store.getters.getUser.username)
-            if(this.$store.getters.getUser.username) {
-                this.user.username = this.$store.getters.getUser.username
-                this.user.avatar = this.$store.getters.getUser.avatar
+          console.log("===============token")
+          console.log(localStorage.getItem("token"))
+          let userInfo = JSON.parse(sessionStorage.getItem("userInfo"))
+          console.log("===============userInfo")
+          console.log(userInfo)
+          console.log(userInfo.username)
+          if(localStorage.getItem("token")){
+                this.user.username = userInfo.username
+                this.user.avatar = userInfo.avatar
                 this.hasLogin = true
-            }
+          }
+            // if(this.$store.getters.getUser.username) {
+            //     this.user.username = this.$store.getters.getUser.username
+            //     this.user.avatar = this.$store.getters.getUser.avatar
+            //     this.hasLogin = true
+            // }
         }
     }
 </script>
