@@ -1,4 +1,4 @@
-# easyblog-frontend
+# yiblog-frontend
 This is a demo for CSUN-COMP586 Object-oriented programming.
 
 ## Project setup
