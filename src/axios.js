@@ -5,9 +5,9 @@ import store from './store'
 
 
 axios.defaults.baseURL = "http://54.177.15.182:8081"
-//axios.defaults.baseURL = "http://localhost:8081"
+// axios.defaults.baseURL = "http://localhost:8081"
 
-// 前置拦截
+// interception
 axios.interceptors.request.use(config => {
     return config
 })
@@ -30,7 +30,7 @@ axios.interceptors.response.use(response => {
                 type: 'error',
                 duration: 2 * 1000
             })
-            // 直接拒绝往下面返回结果信息
+            // reject to return response message
             return Promise.reject(response.data.msg)
         }
     },
@@ -53,7 +53,7 @@ axios.interceptors.response.use(response => {
         if (error.response.data) {
             error.message = error.response.data.msg
         }
-        // 根据请求状态觉得是否登录或者提示其他
+        // decide whether login or not based on response status
         if (error.response.status === 401) {
             store.commit('REMOVE_INFO');
             router.push({

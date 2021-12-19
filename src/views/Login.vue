@@ -62,6 +62,13 @@
 export default {
   name: "Login",
   data() {
+    let checkEmail = (rule, value, cb) => {
+      const regEmail = /^([a-zA-Z]|[0-9])(\w|)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+      if(regEmail.test(value)){
+        return cb()
+      }
+      cb(new Error('plz enter correct Email'))
+    }
     return {
       // log up dialog
       dialogVisible: false,
@@ -100,7 +107,8 @@ export default {
           { required: true, message: 'Plz enter password', trigger: 'blur' }
         ],
         email: [
-          {required: true, message: 'Plz enter email', trigger: 'blur'}
+          {required: true, message: 'Plz enter email', trigger: 'blur'},
+          {validator: checkEmail, trigger: 'blur'}
         ],
       },
     };
@@ -121,9 +129,10 @@ export default {
 
               console.log(_this.$store.getters.getUser)
               _this.$router.push("/blogs")
+
             })
           } else {
-            console.log('error submit!!');
+            window.alert("Please fill in all required info")
             return false;
           }
         });
@@ -142,10 +151,11 @@ export default {
               _this.$store.commit("SET_USERINFO", userInfo)
               console.log(_this.$store.getters.getUser)
               //to blogs component
-              _this.$router.push("/blogs")
+              _this.dialogVisible = false
+              _this.$router.push("/login")
             })
           } else {
-            console.log('error submit!!');
+            window.alert("Please fill in all required and correct info")
             return false;
           }
         });

@@ -70,6 +70,7 @@
                         })
                     } else {
                         console.log('error submit!!');
+                        window.alert("Please fill in all required info")
                         return false;
                     }
                 });
